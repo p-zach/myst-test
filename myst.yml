@@ -2,7 +2,7 @@
 version: 1
 project:
   id: 363066e5-fa8d-445d-bff6-d1b5902f0656
-  title: Porter's Test Site
+  title: GTSAM
   # description:
   # keywords: []
   # authors: []
@@ -10,6 +10,16 @@ project:
   # To autogenerate a Table of Contents, run "myst init --write-toc"
 site:
   template: book-theme
-  # options:
+  nav: 
+    - title: Getting started
+      children:
+      - title: Overview
+        url: /overview
+      - title: Install guide
+        url: /install-guide
+    - title: C++ reference
+      url: https://gtsam.org/doxygen/
+  options:  
+    logo: gtsam.png
   #   favicon: favicon.ico
-  #   logo: site_logo.png
+  
