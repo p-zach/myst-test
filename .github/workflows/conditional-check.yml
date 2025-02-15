@@ -4,23 +4,22 @@ on:
   pull_request:
 
 jobs:
-  # check-paths:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     should_run: ${{ steps.filter.outputs.changes_detected }}
-  #   steps:
-  #     - name: Check Modified Files
-  #       id: filter
-  #       uses: dorny/paths-filter@v2
-  #       with:
-  #         filters: |
-  #           relevant:
-  #             - 'src/**'
-  #             - 'config/**'
+  check-paths:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.filter.outputs.changes_detected }}
+    steps:
+      - name: Check Modified Files
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            relevant:
+              - 'gtsam/**'
 
   conditional-check:
-    # needs: check-paths
-    # if: needs.check-paths.outputs.should_run == 'true'
+    needs: check-paths
+    if: needs.check-paths.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Run Check
