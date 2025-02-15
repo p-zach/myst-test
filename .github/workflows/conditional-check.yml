@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - '**.md'
+  merge_group:
+    types: [checks_requested]
 
 jobs:
   # check-paths:
