@@ -16,6 +16,9 @@ jobs:
           filters: |
             relevant_changes:
               - '!(**.md|**.ipynb|myst.yml)' # Match anything that is not these
+      - name: Debug paths-filter output
+        run: echo "should_run=${{ steps.filter.outputs.relevant_changes }}"
+
 
   build:
     needs: check-paths
