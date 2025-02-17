@@ -13,9 +13,13 @@ jobs:
         id: filter
         uses: dorny/paths-filter@v2
         with:
+          predicate-quantifier: 'every' # If any changed file matches every filter, proceed with build
           filters: |
             relevant_changes:
-              - '!(**.md|**.ipynb|myst.yml)' # Match anything that is not these
+              - '!**.md'
+              - '!**.ipynb'
+              - '!myst.yml'
+              
       - name: Debug paths-filter output
         run: echo "should_run=${{ steps.filter.outputs.relevant_changes }}"
       - name: Show changed files
