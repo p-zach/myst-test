@@ -22,8 +22,6 @@ jobs:
               
       - name: Debug paths-filter output
         run: echo "should_run=${{ steps.filter.outputs.relevant_changes }}"
-      - name: Show changed files
-        run: git diff --name-only ${{ github.event.pull_request.base.sha }}
 
 
   build:
