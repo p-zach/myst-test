@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check modified files
         id: filter
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v3
         with:
           predicate-quantifier: 'every' # If any changed file matches every filter, proceed with build
           filters: |
