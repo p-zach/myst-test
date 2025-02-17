@@ -1,28 +1,25 @@
 name: Conditional Check
 
-on:
-  pull_request:
-    paths:
-      - '**.md'
-  merge_group:
+on: [pull_request]
 
 jobs:
-  # check-paths:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     should_run: ${{ steps.filter.outputs.changes_detected }}
-  #   steps:
-  #     - name: Check Modified Files
-  #       id: filter
-  #       uses: dorny/paths-filter@v2
-  #       with:
-  #         filters: |
-  #           relevant:
-  #             - 'gtsam/**'
+  # Check paths to changed files to see if any are non-ignored.
+  check-paths:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.filter.outputs.relevant_changes }}
+    steps:
+      - name: Check modified files
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            relevant_changes:
+              - '!(**.md|**.ipynb|myst.yml)' # Match anything that is not these
 
-  conditional-check:
-    # needs: check-paths
-    # if: needs.check-paths.outputs.should_run == 'true'
+  build:
+    needs: check-paths
+    if: needs.check-paths.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Run Check
